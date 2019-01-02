@@ -1,1 +1,31 @@
-<h1>Hello fellow coders!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="css/main.css">
+	<meta charset="UTF-8">
+
+	<script src="js/lib/phaser.min.js"></script>
+
+	<script src="js/GlobalVariables.js"></script>
+	<script src="js/Preload.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/GamePlay.js"></script>
+
+	<title>BNES</title>
+</head>
+<body>
+
+	<script>
+	const config = {
+			type: Phaser.AUTO,
+			width: 496,
+			height: 208,
+			physics: {default: 'arcade'},
+			pixelArt: true,
+			scene: myGame.scenes
+	}
+	const game = new Phaser.Game(config)
+	</script>
+	
+</body>
+</html>
