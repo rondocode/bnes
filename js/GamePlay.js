@@ -16,18 +16,24 @@ myGame.scenes.push(gamePlayState);
 
 function gamePlayPreload() {
   this.load.spritesheet('general', 'assets/sprites/general.png', { frameWidth: 16, frameHeight: 16 })
-  //this.load.tilemapTiledJSON('map', 'assets/maps/map.json')
-  //this.load.image('tiles', 'assets/maps/playfield.png')
+  this.load.image("tiles", "assets/maps/playfield.png")
+  this.load.tilemapTiledJSON("map", "assets/maps/map.json");
 }
 
 function gamePlayCreate() {
-  player = this.physics.add.sprite(100, 100, 'general')
+  const map = this.make.tilemap({ key: "map" })
+  const tileset = map.addTilesetImage("playfield", "tiles")
+  const mapLayer = map.createStaticLayer("map", tileset, 0, 0)
+  mapLayer.setCollisionBetween(0,14);
+
+
+  player = this.physics.add.sprite(24, 32, 'general').setSize(12, 12)
 
   this.anims.create({
     key: 'wait',
     frames: this.anims.generateFrameNumbers('general', { frames: [1,9] }),
     repeat: -1,
-    frameRate: myGame.frameRate
+    frameRate: myGame.frameRate-2
   })
   
   this.anims.create({
@@ -52,6 +58,7 @@ function gamePlayCreate() {
   })
 
   player.setCollideWorldBounds(true)
+  this.physics.add.collider(player, mapLayer);
   cursors = this.input.keyboard.createCursorKeys()
 }
 
@@ -61,21 +68,21 @@ function gamePlayUpdate() {
   player.setVelocity(0,0)
 
   if (cursors.left.isDown) {
-    player.setVelocityX(-80)
+    player.setVelocityX(-60)
     player.flipX = true
     player.anims.play('right', true)
   }
   else if (cursors.right.isDown) {
-    player.setVelocityX(80);
+    player.setVelocityX(60);
     player.flipX = false
     player.anims.play('right', true);
   }
   else if (cursors.up.isDown) {
-    player.setVelocityY(-80)
+    player.setVelocityY(-60)
     player.anims.play('up', true);
   }
   else if (cursors.down.isDown) {
-    player.setVelocityY(80)
+    player.setVelocityY(60)
     player.anims.play('down', true);
   }
   else {

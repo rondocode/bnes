@@ -1,5 +1,5 @@
 
 const myGame = {
   scenes: [],
-  frameRate: 5
+  frameRate: 6
 }
