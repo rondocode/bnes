@@ -6,7 +6,6 @@ const preloadState = new Phaser.Class({
       Phaser.Scene.call(this, {key: 'Preload'})
   },
   preload: function() {
-  // Preload images for this state
   },
 
   create: function() {
